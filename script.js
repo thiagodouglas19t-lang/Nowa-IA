@@ -2,7 +2,7 @@ const API_KEY = "COLOCA_SUA_CHAVE_AQUI";
 
 function abrirJogos() {
   document.getElementById("conteudo").innerHTML =
-    "<h2>Jogos ⚽</h2><p>Em breve jogos reais...</p>";
+    "<h2>Jogos ⚽</h2><p>Barcelona 2x1 Real Madrid</p>";
 }
 
 function abrirIA() {
@@ -16,10 +16,28 @@ function abrirIA() {
 }
 
 async function perguntarIA() {
-  const pergunta = document.getElementById("pergunta").value;
+  const pergunta = document.getElementById("pergunta").value.toLowerCase();
 
   document.getElementById("resposta").innerText = "Pensando... 🤔";
 
+  // COMANDOS LOCAIS (controle do app)
+  if (pergunta.includes("jogo")) {
+    abrirJogos();
+    return;
+  }
+
+  if (pergunta.includes("hora")) {
+    document.getElementById("resposta").innerText =
+      new Date().toLocaleTimeString();
+    return;
+  }
+
+  if (pergunta.includes("limpar")) {
+    document.getElementById("conteudo").innerHTML = "";
+    return;
+  }
+
+  // SE NÃO FOR COMANDO → USA IA REAL
   const resposta = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -29,7 +47,7 @@ async function perguntarIA() {
     body: JSON.stringify({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: "Você é um assistente inteligente dentro de um app pessoal." },
+        { role: "system", content: "Você controla um app. Pode abrir jogos, mostrar hora e responder perguntas." },
         { role: "user", content: pergunta }
       ]
     })
