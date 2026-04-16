@@ -1,24 +1,17 @@
-function abrirJogos() {
-  document.getElementById("conteudo").innerHTML =
-    "<h2>Jogos ⚽</h2><p>Barcelona 2x1 Real Madrid</p>";
-}
+async function responder() {
+  let pergunta = document.getElementById("pergunta").value;
 
-function abrirIA() {
-  document.getElementById("conteudo").innerHTML = `
-    <h2>IA 🤖</h2>
-    <input id="pergunta" placeholder="Pergunta..." />
-    <br><br>
-    <button onclick="responder()">Perguntar</button>
-    <p id="resposta"></p>
-  `;
-}
+  document.getElementById("resposta").innerText = "Pensando... 🤖";
 
-function responder() {
-  let pergunta = document.getElementById("pergunta").value.toLowerCase();
+  const resposta = await fetch("/api/ia", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ pergunta })
+  });
 
-  if (pergunta.includes("hora")) {
-    document.getElementById("resposta").innerText = new Date().toLocaleTimeString();
-  } else {
-    document.getElementById("resposta").innerText = "Não entendi 🤔";
-  }
+  const data = await resposta.json();
+
+  document.getElementById("resposta").innerText = data.resposta;
 }
