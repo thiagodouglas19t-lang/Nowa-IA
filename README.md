@@ -1,0 +1,2 @@
+# Nowa-IA
+Ia amiga
