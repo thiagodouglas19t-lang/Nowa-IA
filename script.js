@@ -1,5 +1,14 @@
 const API_KEY = "COLOCA_SUA_CHAVE_AQUI";
 
+// 🔥 LIMPA SERVICE WORKER (IMPORTANTE)
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    for (let registration of registrations) {
+      registration.unregister();
+    }
+  });
+}
+
 function abrirJogos() {
   document.getElementById("conteudo").innerHTML =
     "<h2>Jogos ⚽</h2><p>Em breve...</p>";
