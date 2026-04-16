@@ -1,6 +1,6 @@
 body {
-  background-color: #000;
-  color: #fff;
+  background-color: black;
+  color: white;
   font-family: Arial;
   text-align: center;
 }
@@ -18,24 +18,8 @@ button {
   margin: 10px;
   border-radius: 12px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 button:hover {
   background: #003366;
-  box-shadow: 0 0 10px #00aaff;
-}
-
-input {
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #00aaff;
-  background: black;
-  color: white;
-  width: 70%;
-}
-
-#resposta {
-  margin-top: 15px;
-  color: #00ffaa;
 }
