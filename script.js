@@ -58,3 +58,6 @@ async function perguntarIA() {
   document.getElementById("resposta").innerText =
     data.choices[0].message.content;
 }
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
